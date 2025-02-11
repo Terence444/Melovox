@@ -4,6 +4,13 @@
         <meta charset="utf-8"/>
         <title>MÉLOVOX</title>
         <link rel="stylesheet" href="contactform_style.css"> 
+
+        <link rel="stylesheet" href="menu-deroulant.css">
+        <script src="menu-deroulant.js" defer></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
@@ -17,11 +24,17 @@
             <h1 >Mélovox</h1>
             </div>
             <div id="search_connex">
-                <div id="burger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <div class="wrapMenu">
+                    <div class="menu menu--top-right" id="menu_top_right">
+                      <a class="menu__btn" dd-nav-expand="menu_top_right"><img src="visuel\icons\menu_hamburger.png" alt=""></a>
+                      <ul class="menu__list">
+                        <li><a href="#">Accueil</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Galerie</a></li>
+                      </ul>
+                    </div>
                 </div>
+
                 <a href="search.html"><span class="material-symbols-outlined">search</span></a>
                 <a href="connexion.html"><button>Connexion</button></a>
                 <span id="vertical_line"></span>
