@@ -162,33 +162,33 @@ font-size: 17pt;
     margin-right: 47px;
 }
 #shuffle {
-    background-image: url('Ellipse 8.png');
+    background-image: url('visuel/icons/buttons_icons/Shuffle.png');
     background-size: cover;
     border-radius: 100px
 }
 
 #previous{
-    background-image: url('previous.png');
+    background-image: url('visuel/icons/buttons_icons/previous.png');
     background-size: cover;
     border-radius: 100px
 }
 
 #play{
-    background-image: url('Bouton Play.png');
+    background-image: url('visuel/icons/buttons_icons/Bouton Play.png');
     background-size: cover;
     border-radius: 100px
 }
 
 #skip{
 
-    background-image: url('skip.png');
+    background-image: url('visuel/icons/buttons_icons/skip.png');
     background-size: cover;
 
     border-radius: 100px
 }
 
 #plus{
-    background-image: url('Plus.png');
+    background-image: url('visuel/icons/buttons_icons/Plus.png');
     background-size: cover;
     border-radius: 100px
 }
@@ -254,7 +254,7 @@ height: 80px;
   
   .tracklist li .track-duration {
     display: inline-block;
-
+    float: right;
   }
   
   

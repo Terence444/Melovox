@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8"/>
+        <title>MÉLOVOX</title>
+        <link rel="stylesheet" href="contactform_style.css"> 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search" />
+        <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header> 
+        <div id="logo_title">
+            <a href="index.html"><img id="logo" src="visuel\logo\logo.png" alt=""></a>
+            <h1 >Mélovox</h1>
+            </div>
+            <div id="search_connex">
+                <div id="burger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <a href="search.html"><span class="material-symbols-outlined">search</span></a>
+                <a href="connexion.html"><button>Connexion</button></a>
+                <span id="vertical_line"></span>
+                <a href="form.html"><button>Inscription</button></a>
+            </div>
+    </header>
+    <h3>♫ Laissez un nous message ! ♫</h3>
+         <section>
+
+            <div id="image_area">
+                <img id="image" src="visuel\image\Crowd_concert.jpg" alt="">
+            </div>
+            <span class="vertical_line"></span>
+        
+            <div id="contact_form">
+                
+        
+                <div id="instructions">
+                    <h3>Contactez-nous!</h3>
+                    <p>Veuillez renseigner les champs suivants pour nous adresser votre message.</p>
+                </div>
+
+            <form onsubmit="return validateForm()" method="post" action="/submit">
+                <div id="name_area"> 
+                    <input type="text" id="name" name="name" placeholder="Votre nom" required>
+                </div>
+                
+                <div id="first_name_area">
+                    <input type="text" id="first_name" name="first_name" placeholder="Votre prénom" required>
+                </div>
+
+                 <div id="email_area">
+                    <input type="email" id="email" name="email" placeholder="Votre email" required>
+                </div>
+
+                <div id="user_type_area">
+                    <legend id="question2">Êtes vous artiste?</legend>
+                    <div id="answers2">
+                        <div>
+                            <input type="radio" name="artist" id="yes"> 
+                            <label for="yes">Oui</label>
+                            <input type="radio" name="artist" id="no">
+                            <label for="no">Non</label>
+                        </div>
+                    </div>
+                </div>
+
+                 <div id="share_area">
+                    <legend id="question3">Avez vous des créations à partager?</legend>
+                    
+                    <div id="answers3">
+                        <div>
+                            <input type="radio" name="sharing" id="yes">
+                            <label for="yes">Oui</label>
+                        
+                        
+                            <input type="radio" name="sharing" id="no">
+                            <label for="no">Non</label>
+                        </div>
+                    </div>
+                </div>
+
+                <textarea id="message" name="message" placeholder="Votre message" required></textarea>
+                
+                <button type="submit">Envoyer</button>
+
+
+            </form>
+
+        
+            <script>
+                function validateForm() {
+                    var name = document.getElementById('name').value;
+                    var email = document.getElementById('email').value;
+                    var message = document.getElementById('message').value;
+        
+                    if (name === "" || email === "" || message === "") {
+                        alert("Tous les champs doivent être remplis!");
+                        return false;
+                    }
+                    
+                    return true;
+                }
+            </script>
+        </div>
+        </section>
+   
+        <footer>
+            <ul>
+                <li><a href="">Lorem Ipsum</a></li>
+                <li><a href="">Lorem Ipsum</a></li>
+                <li><a href="">Lorem Ipsum</a></li>
+                <li><a href="">Lorem Ipsum</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="">Lorem Ipsum</a></li>
+                <li><a href="">Lorem Ipsum</a></li>
+                <li><a href="">Lorem Ipsum</a></li>
+                <li><a href="">Lorem Ipsum</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="">Lorem Ipsum</a></li>
+                <li><a href="">Lorem Ipsum</a></li>
+                <li><a href="">Lorem Ipsum</a></li>
+                <li><a href="">Lorem Ipsum</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="">Lorem Ipsum</a></li>
+                <li><a href="">Lorem Ipsum</a></li>
+                <li><a href="">Lorem Ipsum</a></li>
+                <li><a href="">Lorem Ipsum</a></li>
+            </ul>
+        </footer>
+       
+    </body>
+</html>

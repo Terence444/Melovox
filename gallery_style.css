@@ -159,12 +159,25 @@ header button{
     text-decoration: underline;
     font-weight: bold;
 }
-#artist_icon{
+#artist_area{
     flex-wrap: wrap;
     gap: 60px;
     display: flex;
     justify-content: space-between;
     width: 90%;
+}
+#artist_area a{
+    font-family: "Josefin Sans", serif;
+    font-size: 20pt;
+    color: white;
+    text-decoration: none;
+}
+#artist_icon{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
 }
 
 /* --------- Footer-------- */
