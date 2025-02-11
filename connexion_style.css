@@ -57,7 +57,7 @@ header h1{
     gap: 10px;
 }
 
-#search_connex a{}
+#search_connex a,
 #search_connex span{
     font-size: 35pt;
     color: white;
