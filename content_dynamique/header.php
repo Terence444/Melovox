@@ -4,12 +4,13 @@
 <head>
     <meta charset="utf-8" />
     <title>MÉLOVOX</title>
+
+    <!-- Css du header et footer -->
+    <link rel="stylesheet" href="content_dynamique/header.css">
+    <link rel="stylesheet" href="content_dynamique/footer.css">
+
     <!-- Programme pour charger chaque feuille de style CSS en fonction du nom des pages -->
     <?php
-        ini_set('display_errors', 1);
-        ini_set('display_startup_errors', 1);
-        error_reporting(E_ALL);
-
         // Définir le fichier CSS spécifique à la page
         $fichier_css_spe = array(
         'albums_ep_single_style' => 'albums_ep_single_style.css',
@@ -30,9 +31,7 @@
 
         // Inclure le fichier CSS spécifique à la page si disponible
         if (array_key_exists($page, $fichier_css_spe)) {
-            echo "<link rel='stylesheet' type='text/css' href='$fichier_css_spe[$page]'>";
-        } else {
-            echo "<!-- Aucun fichier CSS trouvé pour la page : $page -->";
+            echo "<link rel='stylesheet' type='text/css' href='/styles/" . $fichier_css_spe[$page] . "'>";
         }
     ?>
 
