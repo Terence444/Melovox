@@ -1,8 +1,8 @@
-<?php require "content_dynamique/header.php"; ?>
+<?php require "../content_dynamique/header.php"; ?>
 
 <section>
     <div id="image_area">
-        <img id="image" src="visuel/image/social_music_network_2.jpg" alt="">
+        <img id="image" src="../visuel/image/social_music_network_2.jpg" alt="">
     </div>
     <span class="vertical_line"></span>
 
@@ -18,7 +18,8 @@
                         alt=""></a></button>
         </div>
         <img id="decorative_line" src="visuel/image/Decoration.png" alt="">
-        <form action="database\connex_bdd.php" method="post">
+
+        <form action="connexion\verif_connexion.php" method="post">
             <div id="email_area">
                 <label for="email">Adresse Email</label>
                 <input type="text" id="email" name="email" required>
@@ -37,6 +38,7 @@
             </div>
             <p>Pas encore inscrit? <a href="form.php">Inscrivez-vous ici</a></p>
         </form>
+
     </div>
 </section>
 
