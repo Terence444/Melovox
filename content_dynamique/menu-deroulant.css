@@ -99,7 +99,8 @@
         position: relative;
         display: inline-block;
         width: 100%;
-        font-size: larger;
+        font-size: 15pt!important;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif!important;
         padding: 15px 25px;
         color: #fff;
         text-decoration: none;

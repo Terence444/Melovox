@@ -11,30 +11,22 @@
 
     <!-- Programme pour charger chaque feuille de style CSS en fonction du nom des pages -->
     <?php
-        // Définir le fichier CSS spécifique à la page
-        $fichier_css_spe = array(
-        'albums_ep_single_style' => 'albums_ep_single_style.css',
-        'artist_profile_style' => 'artist_profile_style.css',
-        'category_style' => 'category_style.css',
-        'connexion_style' => 'connexion_style.css',
-        'contactform_style' => 'contactform_style.css',
-        'form_style' => 'form_style.css',
-        'gallery_style' => 'gallery_style.css',
-        'index' => 'index_style.css',
-        'playlist_style' => 'playlist_style.css',
-        'profile_style' => 'profile_style.css',
-        'search_style' => 'search_style.css',
-        );
+        // Définir le chemin des fichiers CSS en utilisant une constante
+        define('CSS_PATH', '/styles/');
 
-         // Identifier la page actuelle (par exemple, basée sur une variable de page)
-        $page = basename($_SERVER['PHP_SELF'], ".php");
-
-        // Inclure le fichier CSS spécifique à la page si disponible
-        if (array_key_exists($page, $fichier_css_spe)) {
-            echo "<link rel='stylesheet' type='text/css' href='/styles/" . $fichier_css_spe[$page] . "'>";
-        }
+        // Inclure directement les fichiers CSS
+        echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "albums_ep_single_style.css'>";
+        echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "artist_profile_style.css'>";
+        echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "category_style.css'>";
+        echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "connexion_style.css'>";
+        echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "contactform_style.css'>";
+        echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "form_style.css'>";
+        echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "gallery_style.css'>";
+        echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "index_style.css'>";
+        echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "playlist_style.css'>";
+        echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "profile_style.css'>";
+        echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "search_style.css'>";
     ?>
-
 
     <!-- meta pour menu hamburger -->
     <link rel="stylesheet" href="content_dynamique\menu-deroulant.css">
