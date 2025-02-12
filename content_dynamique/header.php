@@ -14,18 +14,33 @@
         // Définir le chemin des fichiers CSS en utilisant une constante
         define('CSS_PATH', '/styles/');
 
-        // Inclure directement les fichiers CSS
-        echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "albums_ep_single_style.css'>";
-        echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "artist_profile_style.css'>";
-        echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "category_style.css'>";
-        echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "connexion_style.css'>";
-        echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "contactform_style.css'>";
-        echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "form_style.css'>";
-        echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "gallery_style.css'>";
-        echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "index_style.css'>";
-        echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "playlist_style.css'>";
-        echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "profile_style.css'>";
-        echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "search_style.css'>";
+        // Identifier la page actuelle (basée sur une variable de page)
+        $page = basename($_SERVER['PHP_SELF']);
+
+        // Vérifier si le nom de la page est "nom_du_fichier.php"
+        if ($page === 'albums_ep_single.php'){
+            echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "albums_ep_single_style.css'>"; 
+        } elseif ($page === 'artist_profile.php'){
+            echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "artist_profile_style.css'>";
+        }elseif ($page === 'category.php'){
+            echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "category_style.css'>";
+        }elseif ($page === 'connexion.php'){
+            echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "connexion_style.css'>";
+        }elseif ($page === 'contactform.php'){
+            echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "contactform_style.css'>";
+        }elseif ($page === 'form.php'){
+            echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "form_style.css'>";
+        }elseif ($page === 'gallery.php'){
+            echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "gallery_style.css'>";
+        }elseif ($page === 'index.php'){
+            echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "index_style.css'>";
+        }elseif ($page === 'playlist.php'){
+            echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "playlist_style.css'>";
+        }elseif ($page === 'profile.php'){
+            echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "profile_style.css'>";
+        }elseif ($page === 'search.php'){
+            echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "search_style.css'>";
+        }
     ?>
 
     <!-- meta pour menu hamburger -->

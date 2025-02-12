@@ -1,6 +1,7 @@
 <?php require "content_dynamique/header.php"; ?>
 
 <h3>♫ Laissez un nous message ! ♫</h3>
+
 <section>
 
     <div id="image_area">
