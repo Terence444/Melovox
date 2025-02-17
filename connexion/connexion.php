@@ -42,4 +42,4 @@
     </div>
 </section>
 
-<?php require "content_dynamique/footer.php"; ?>
+<?php require "../content_dynamique/footer.php"; ?>

@@ -44,7 +44,7 @@
     ?>
 
     <!-- meta pour menu hamburger -->
-    <link rel="stylesheet" href="content_dynamique\menu-deroulant.css">
+    <link rel="stylesheet" href="content_dynamique/menu-deroulant.css">
     <script src="content_dynamique\menu-deroulant.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

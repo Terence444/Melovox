@@ -6,7 +6,7 @@
     <div id="gallery" class="zone_pres">
         <div class="icone_lien">
             <img src="visuel\icons\gallery_icon.png" alt="">
-            <a href="Gallery.html">Accéder à la Galerie</a>
+            <a href="gallery.php">Accéder à la Galerie</a>
         </div>
         <div class="texte_pres">
             <h3>Explorez la galerie</h3>
