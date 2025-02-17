@@ -113,6 +113,11 @@ if (isset($_SESSION['erreurs'])) {
                 <input type="password" id="password_confirm" name="confirmation_mot_de_passe" minlength="8" required>
             </div>
 
+            <div id="add_profile_photo">
+                <label for="fileInput">Photo de profil:</label>
+                <input type="file" id="fileInput" name="profilePhoto" accept="image/*" required>
+            </div>
+
             <input id="sign_in" type="submit" value="S'inscrire">
         </form>
     </div>
