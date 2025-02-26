@@ -373,3 +373,9 @@ width: 30%;
     cursor: pointer;
 
 }
+
+.error {
+    font-size: 10pt;
+    margin-left: 10px;
+    color: red;
+}

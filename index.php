@@ -41,26 +41,26 @@
     <div id="slide_artiste">
         <img class="arrow" src="visuel\icons\buttons_icons\Arrow_left_circle.png" alt="">
         <div class="photo_artiste">
-            <a href="artist_profile.html"><img src="visuel\icons\users icons\alexia.png" alt=""></a>
-            <a href="artist_profile.html">Alexia</a>
+            <a href="artist_profile.php"><img src="visuel\icons\users icons\alexia.png" alt=""></a>
+            <a href="artist_profile.php">Alexia</a>
         </div>
         <div class="photo_artiste">
-            <a href="artist_profile.html"><img src="visuel\icons\users icons\charles.png" alt=""></a>
-            <a href="artist_profile.html">Charles</a>
+            <a href="artist_profile.php"><img src="visuel\icons\users icons\charles.png" alt=""></a>
+            <a href="artist_profile.php">Charles</a>
         </div>
         <div class="photo_artiste">
-            <a href="artist_profile.html"><img src="visuel\icons\users icons\Eleana.png" alt=""></a>
-            <a href="artist_profile.html">Eleana</a>
+            <a href="artist_profile.php"><img src="visuel\icons\users icons\Eleana.png" alt=""></a>
+            <a href="artist_profile.php">Eleana</a>
 
         </div>
 
         <div class="photo_artiste">
-            <a href="artist_profile.html"><img src="visuel\icons\users icons\Kévin.png" alt=""></a>
-            <a href="artist_profile.html">Kévin</a>
+            <a href="artist_profile.php"><img src="visuel\icons\users icons\Kévin.png" alt=""></a>
+            <a href="artist_profile.php">Kévin</a>
         </div>
         <div class="photo_artiste">
-            <a href="artist_profile.html"><img src="visuel\icons\users icons\Orisa.png" alt=""></a>
-            <a href="artist_profile.html">Orisa</a>
+            <a href="artist_profile.php"><img src="visuel\icons\users icons\Orisa.png" alt=""></a>
+            <a href="artist_profile.php">Orisa</a>
         </div>
         <img class="arrow" src="visuel\icons\buttons_icons\Arrow_right_circle.png" alt="">
     </div>

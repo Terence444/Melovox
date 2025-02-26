@@ -28,7 +28,7 @@
         echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "contactform_style.css'>";
     } elseif ($page === 'connexion.php') {
         echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "connexion_style.css'>";
-    } elseif ($page === 'form.php') {
+    } elseif ($page === 'inscription.php') {
         echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "form_style.css'>";
     } elseif ($page === 'gallery.php') {
         echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "gallery_style.css'>";
@@ -82,6 +82,6 @@
             <a href="search.php"><span class="material-symbols-outlined">search</span></a>
             <a href="connexion.php"><button>Connexion</button></a>
             <span id="vertical_line"></span>
-            <a href="form.php"><button>Inscription</button></a>
+            <a href="inscription.php"><button>Inscription</button></a>
         </div>
     </header>

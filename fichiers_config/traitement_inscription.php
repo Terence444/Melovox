@@ -1,124 +1,88 @@
 <?php
-// Informations de connexion à la base de données
-$host = 'localhost';
-$dbname = 'melovox';
-$db_username = 'root'; // Remplacez par votre nom d'utilisateur
-$db_password = '';    // Remplacez par votre mot de passe
+    include "../database/connex_bdd.php";
 
-try {
-    // Connexion à la base de données
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $db_username, $db_password);
-    // Configuration des erreurs PDO
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    // Démarrage de la session
+    // Démarrer la session pour stocker les messages d'erreur
     session_start();
 
-    // Vérification que le formulaire a été soumis
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Récupération des données du formulaire
-        $nom = trim($_POST['nom']);
-        $prenom = trim($_POST['prenom']);
-        $date_naissance = $_POST['date_naissance'];
-        $email = trim($_POST['email']);
-        $sexe = $_POST['sexe'];
-        $est_artiste = $_POST['est_artiste'];
-        $partage_creations = $_POST['partage_creations'];
-        $pays = trim($_POST['pays']);
-        $pseudo = trim($_POST['pseudo']);
-        $mot_de_passe = $_POST['mot_de_passe'];
-        $confirmation_mot_de_passe = $_POST['confirmation_mot_de_passe'];
+    // Récupérer les données du formulaire
+    $nom = $_POST['nom'];
+    $prenom = $_POST['prenom'];
+    $date_naissance = $_POST['date_naissance'];
+    $email = $_POST['email'];
+    $sexe = $_POST['sexe'];
+    $est_artiste = $_POST['est_artiste'];
+    $partage_creations = $_POST['partage_creations'];
+    $pays = $_POST['pays'];
+    $pseudo = $_POST['pseudo'];
+    $mot_de_passe = password_hash($_POST['mot_de_passe'], PASSWORD_DEFAULT);
 
-        // Tableau pour stocker les erreurs
-        $erreurs = [];
+    // Initialiser les messages d'erreur
+    $email_error = '';
+    $pseudo_error = '';
 
-        // Validation des données
-        if (empty($nom)) {
-            $erreurs[] = "Veuillez saisir votre nom.";
-        }
+    // Vérifier si l'adresse email existe déjà
+    $sql = "SELECT id FROM utilisateurs WHERE email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $stmt->store_result();
+    if ($stmt->num_rows > 0) {
+        $email_error = "Cette adresse email est déjà utilisée.";
+    }
+    $stmt->close();
 
-        if (empty($prenom)) {
-            $erreurs[] = "Veuillez saisir votre prénom.";
-        }
+    // Vérifier si le nom d'utilisateur existe déjà
+    $sql = "SELECT id FROM utilisateurs WHERE pseudo = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $pseudo);
+    $stmt->execute();
+    $stmt->store_result();
+    if ($stmt->num_rows > 0) {
+        $pseudo_error = "Ce nom d'utilisateur est déjà utilisé.";
+    }
+    $stmt->close();
 
-        if (empty($date_naissance)) {
-            $erreurs[] = "Veuillez indiquer votre date de naissance.";
-        }
+    // Si des erreurs sont présentes, les stocker en session et rediriger vers le formulaire
+    if (!empty($email_error) || !empty($pseudo_error)) {
+        $_SESSION['email_error'] = $email_error;
+        $_SESSION['pseudo_error'] = $pseudo_error;
+        // Stocker les données saisies pour les réafficher
+        $_SESSION['form_data'] = $_POST;
+        header("Location: ../inscription.php");
+        exit();
+    }
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $erreurs[] = "L'adresse email est invalide.";
-        }
+    // Gérer l'upload de la photo de profil
+    $photo_profil = null;
+    if (isset($_FILES['profilePhoto']) && $_FILES['profilePhoto']['error'] === UPLOAD_ERR_OK) {
+        // Créer un nom de fichier unique pour éviter les conflits
+        $photo_profil = 'uploads/' . uniqid() . '_' . basename($_FILES['profilePhoto']['name']);
+        move_uploaded_file($_FILES['profilePhoto']['tmp_name'], $photo_profil);
+    }
 
-        if (empty($pays)) {
-            $erreurs[] = "Veuillez indiquer votre pays.";
-        }
+    // Préparer et exécuter la requête d'insertion
+    $sql = "INSERT INTO utilisateurs (nom, prenom, date_naissance, email, sexe, est_artiste, partage_creations, pays, pseudo, mot_de_passe, photo_profil)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        if (empty($pseudo)) {
-            $erreurs[] = "Veuillez choisir un nom d'utilisateur.";
-        }
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sssssiissss", $nom, $prenom, $date_naissance, $email, $sexe, $est_artiste,
+                      $partage_creations, $pays, $pseudo, $mot_de_passe, $photo_profil);
 
-        if (strlen($mot_de_passe) < 8) {
-            $erreurs[] = "Le mot de passe doit contenir au moins 8 caractères.";
-        }
-
-        if ($mot_de_passe !== $confirmation_mot_de_passe) {
-            $erreurs[] = "Les mots de passe ne correspondent pas.";
-        }
-
-        // Vérification de l'unicité du pseudo et de l'email
-        $stmt = $pdo->prepare("SELECT COUNT(*) FROM utilisateurs WHERE pseudo = :pseudo OR email = :email");
-        $stmt->execute(['pseudo' => $pseudo, 'email' => $email]);
-        $existe = $stmt->fetchColumn();
-
-        if ($existe) {
-            $erreurs[] = "Le nom d'utilisateur ou l'email est déjà utilisé.";
-        }
-
-        // Si aucune erreur, on enregistre l'utilisateur
-        if (empty($erreurs)) {
-            // Hachage du mot de passe
-            $mot_de_passe_hash = password_hash($mot_de_passe, PASSWORD_DEFAULT);
-
-            // Insertion des données
-            $sql = "INSERT INTO utilisateurs (nom, prenom, date_naissance, email, sexe, est_artiste, partage_creations, pays, pseudo, mot_de_passe)
-                    VALUES (:nom, :prenom, :date_naissance, :email, :sexe, :est_artiste, :partage_creations, :pays, :pseudo, :mot_de_passe)";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([
-                'nom' => $nom,
-                'prenom' => $prenom,
-                'date_naissance' => $date_naissance,
-                'email' => $email,
-                'sexe' => $sexe,
-                'est_artiste' => $est_artiste,
-                'partage_creations' => $partage_creations,
-                'pays' => $pays,
-                'pseudo' => $pseudo,
-                'mot_de_passe' => $mot_de_passe_hash
-            ]);
-
-            // Création de la session utilisateur
-            $_SESSION['id'] = $pdo->lastInsertId();
-            $_SESSION['pseudo'] = $pseudo;
-
-            // Redirection vers la page de bienvenue
-            header('Location: bienvenue.php');
+    if ($stmt->execute()) {
+        // Nettoyer les données de session
+        unset($_SESSION['form_data']);
+        // Rediriger l'utilisateur en fonction de ses réponses
+        if ($est_artiste == 1 && $partage_creations == 1) {
+            header("Location: espace_perso_artiste.php");
             exit();
         } else {
-            // Affichage des erreurs
-            foreach ($erreurs as $erreur) {
-                echo "<p style='color:red;'>{$erreur}</p>";
-            }
+            header("Location: espace_perso_user.php");
+            exit();
         }
+    } else {
+        echo "Erreur lors de l'inscription : " . $conn->error;
     }
-} catch (PDOException $e) {
-    echo "Erreur : " . $e->getMessage();
-}
 
-// Après avoir collecté les erreurs
-if (!empty($erreurs)) {
-    $_SESSION['erreurs'] = $erreurs;
-    header('Location: inscription.php');
-    exit();
-}
-
+    $stmt->close();
+    $conn->close();
 ?>

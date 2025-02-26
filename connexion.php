@@ -21,7 +21,7 @@
         </div>
         <img id="decorative_line" src="visuel/image/Decoration.png" alt="">
 
-        <form action="connexion\verif_connexion.php" method="post">
+        <form action="fichiers_config/traitement_connexion.php" method="post">
             <div id="email_area">
                 <label for="email">Adresse Email</label>
                 <input type="text" id="email" name="email" required>
@@ -38,7 +38,7 @@
             <div id="sign_in">
                 <input id="connect" type="submit" value="Se connecter">
             </div>
-            <p>Pas encore inscrit? <a href="form.php">Inscrivez-vous ici</a></p>
+            <p>Pas encore inscrit? <a href="inscription.php">Inscrivez-vous ici</a></p>
         </form>
 
     </div>

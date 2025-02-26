@@ -1,5 +1,19 @@
 <?php require "content_dynamique/header.php"; ?>
 
+
+<style>
+        .message {
+            font-size: 1em;
+            margin: 10px 0;
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+</style>    
+
 <h3>♫ Laissez un nous message ! ♫</h3>
 
 <section>
@@ -17,51 +31,52 @@
             <p>Veuillez renseigner les champs suivants pour nous adresser votre message.</p>
         </div>
 
-        <form onsubmit="return validateForm()" method="post" action="/submit">
-            <div id="name_area">
-                <input type="text" id="name" name="name" placeholder="Votre nom" required>
-            </div>
 
-            <div id="first_name_area">
-                <input type="text" id="first_name" name="first_name" placeholder="Votre prénom" required>
-            </div>
+        
+        <?php
+            if (isset($_SESSION['contact_success'])) {
+                echo '<p class="message success">' . $_SESSION['contact_success'] . '</p>';
+                unset($_SESSION['contact_success']);
+            }
 
-            <div id="email_area">
-                <input type="email" id="email" name="email" placeholder="Votre email" required>
-            </div>
+            if (isset($_SESSION['contact_error'])) {
+                echo '<p class="message error">' . $_SESSION['contact_error'] . '</p>';
+                unset($_SESSION['contact_error']);
+            }
+        ?>
 
-            <div id="user_type_area">
-                <legend id="question2">Êtes vous artiste?</legend>
-                <div id="answers2">
-                    <div>
-                        <input type="radio" name="artist" id="yes">
-                        <label for="yes">Oui</label>
-                        <input type="radio" name="artist" id="no">
-                        <label for="no">Non</label>
+        <form onsubmit="return validateForm()" method="post" action="fichiers_config/traitement_contact.php">
+                <div id="name_area">
+                    <input type="text" id="name" name="name" placeholder="Votre nom" required>
+                </div>
+
+                <div id="first_name_area">
+                    <input type="text" id="first_name" name="first_name" placeholder="Votre prénom" required>
+                </div>
+
+                <div id="email_area">
+                    <input type="email" id="email" name="email" placeholder="Votre email" required>
+                </div>
+
+                <div id="user_type_area">
+                    <legend id="question2">Êtes-vous artiste?</legend>
+                    <div id="answers2">
+                        <div>
+                            <input type="radio" name="artist" id="artist_yes" value="oui" required>
+                            <label for="artist_yes">Oui</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="artist" id="artist_no" value="non">
+                            <label for="artist_no">Non</label>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div id="share_area">
-                <legend id="question3">Avez vous des créations à partager?</legend>
+                    <textarea id="message" name="message" placeholder="Votre message" rows="25" required></textarea>
 
-                <div id="answers3">
-                    <div>
-                        <input type="radio" name="sharing" id="yes">
-                        <label for="yes">Oui</label>
-
-
-                        <input type="radio" name="sharing" id="no">
-                        <label for="no">Non</label>
-                    </div>
+                <div id="submit_area">
+                    <button type="submit">Envoyer</button>
                 </div>
-            </div>
-
-            <textarea id="message" name="message" placeholder="Votre message" required></textarea>
-
-            <button type="submit">Envoyer</button>
-
-
         </form>
 
 

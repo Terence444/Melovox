@@ -22,7 +22,6 @@
         <h3>Nombre <br>d'auditeurs</h3>
     </div>
 
-
 </section>
 
 <div id="top3">

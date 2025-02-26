@@ -2,12 +2,13 @@
 
 <?php
 session_start();
-if (isset($_SESSION['erreurs'])) {
-    foreach ($_SESSION['erreurs'] as $erreur) {
-        echo "<p style='color:red;'>{$erreur}</p>";
-    }
-    unset($_SESSION['erreurs']);
-}
+// Récupérer les messages d'erreur
+$email_error = isset($_SESSION['email_error']) ? $_SESSION['email_error'] : '';
+$pseudo_error = isset($_SESSION['pseudo_error']) ? $_SESSION['pseudo_error'] : '';
+// Récupérer les données du formulaire précédemment saisies
+$form_data = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : array();
+// Nettoyer les variables de session
+unset($_SESSION['email_error'], $_SESSION['pseudo_error'], $_SESSION['form_data']);
 ?>
 
 
@@ -26,7 +27,7 @@ if (isset($_SESSION['erreurs'])) {
             <p>Veuillez renseigner les champs pour procéder à la création de votre espace personnel</p>
         </div>
 
-        <form action="traitement_form.php" method="post">
+        <form action="fichiers_config/traitement_inscription.php" method="post" enctype="multipart/form-data" id="inscriptionForm">
             <div id="name_area">
                 <label for="name">Nom</label>
                 <input type="text" id="name" name="nom" required>
@@ -45,6 +46,9 @@ if (isset($_SESSION['erreurs'])) {
             <div id="email_area">
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email" required>
+                <?php if ($email_error): ?>
+                    <p class="error"><?php echo $email_error; ?></p>
+                <?php endif; ?>
             </div>
 
             <div id="gender_area">
@@ -101,6 +105,9 @@ if (isset($_SESSION['erreurs'])) {
             <div id="nickname_area">
                 <label for="nickname">Nom d'utilisateur</label>
                 <input type="text" name="pseudo" id="nickname" required>
+                <?php if ($pseudo_error): ?>
+                     <p class="error"><?php echo $pseudo_error; ?></p>
+                <?php endif; ?>
             </div>
 
             <div id="password_area">
@@ -122,6 +129,5 @@ if (isset($_SESSION['erreurs'])) {
         </form>
     </div>
 </section>
-
 
 <?php require "content_dynamique/footer.php"; ?>
