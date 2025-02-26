@@ -24,10 +24,10 @@
         echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "artist_profile_style.css'>";
     } elseif ($page === 'category.php') {
         echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "category_style.css'>";
-    } elseif ($page === 'connexion.php') {
-        echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "connexion_style.css'>";
     } elseif ($page === 'contactform.php') {
         echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "contactform_style.css'>";
+    } elseif ($page === 'connexion.php') {
+        echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "connexion_style.css'>";
     } elseif ($page === 'form.php') {
         echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "form_style.css'>";
     } elseif ($page === 'gallery.php') {
@@ -72,15 +72,15 @@
                     <a class="menu__btn" dd-nav-expand="menu_top_right"><img src="visuel\icons\menu_hamburger.png"
                             alt=""></a>
                     <ul class="menu__list">
-                        <li><a href="#">Accueil</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Galerie</a></li>
+                        <li><a href="index.php">Accueil</a></li>
+                        <li><a href="contactform.php">Contact</a></li>
+                        <li><a href="gallery.php">Galerie</a></li>
                     </ul>
                 </div>
             </div>
 
             <a href="search.php"><span class="material-symbols-outlined">search</span></a>
-            <a href="connexion\connexion.php"><button>Connexion</button></a>
+            <a href="connexion.php"><button>Connexion</button></a>
             <span id="vertical_line"></span>
             <a href="form.php"><button>Inscription</button></a>
         </div>

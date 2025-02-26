@@ -1,4 +1,6 @@
-<?php require "../content_dynamique/header.php"; ?>
+<?php require "content_dynamique/header.php"; ?>
+
+<body>
 
 <section>
     <div id="image_area">
@@ -10,11 +12,11 @@
         <h3>Connexion rapide</h3>
         <p>Lier votre compte avec un réseau social</p>
         <div id="button_icon">
-            <button><a href=""><img class="social_network" src="visuel/icons/buttons_icons/Bouton_facebook.png"
+            <button><a href=""><img class="social_network" src="../visuel/icons/buttons_icons/Bouton_facebook.png"
                         alt=""></a></button>
-            <button><a href=""><img class="social_network" src="visuel/icons/buttons_icons/Bouton_Gmail.png"
+            <button><a href=""><img class="social_network" src="../visuel/icons/buttons_icons/Bouton_Gmail.png"
                         alt=""></a></button>
-            <button><a href=""><img class="social_network" src="visuel/icons/buttons_icons/Bouton_X.png"
+            <button><a href=""><img class="social_network" src="../visuel/icons/buttons_icons/Bouton_X.png"
                         alt=""></a></button>
         </div>
         <img id="decorative_line" src="visuel/image/Decoration.png" alt="">
@@ -42,4 +44,4 @@
     </div>
 </section>
 
-<?php require "../content_dynamique/footer.php"; ?>
+<?php require "content_dynamique/footer.php"; ?>

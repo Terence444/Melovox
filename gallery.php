@@ -24,7 +24,6 @@
         <a href="category.php"><button class="Categorie" type="button">House</button></a>
         <a href="category.php"><button class="Categorie" type="button">Lo-fi</button></a>
         <a href="category.php"><button class="Categorie" type="button">Ambient</button></a>
-
     </div>
 </div>
 <!-- /* --------- Section 2-------- */ -->
