@@ -14,5 +14,5 @@
         die("Connection failed: " . $conn->connect_error);
     }
     // Affiche un message de succès si la connexion est établie
-    echo "Connected successfully";
+    echo "";
 ?>
