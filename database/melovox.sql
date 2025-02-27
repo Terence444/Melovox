@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 26 fév. 2025 à 21:41
+-- Généré le : jeu. 27 fév. 2025 à 19:53
 -- Version du serveur : 8.3.0
 -- Version de PHP : 8.2.18
 
@@ -20,6 +20,29 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `melovox`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `artistes`
+--
+
+DROP TABLE IF EXISTS `artistes`;
+CREATE TABLE IF NOT EXISTS `artistes` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `utilisateur_id` int NOT NULL,
+  `biographie` text,
+  `photo_profil` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `utilisateur_id` (`utilisateur_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `artistes`
+--
+
+INSERT INTO `artistes` (`id`, `utilisateur_id`, `biographie`, `photo_profil`) VALUES
+(1, 1, 'Ceci est un test de biographie d\'artiste\r\nLorem ipsum dolor sit amet. In doloremque repudiandae ut saepe quasi sed excepturi consequatur sit totam eveniet ab ipsum facilis. Ab quis nostrum aut blanditiis voluptas sit omnis fuga? Et tempore numquam est libero maiores aut galisum repellendus est maxime nesciunt. </p><p>Est deserunt blanditiis hic quae magni aut asperiores aliquid qui mollitia laboriosam et amet amet et voluptatum beatae sit inventore molestiae! Aut minus explicabo eos blanditiis laborum sit dolores expedita! </p><p>Est voluptas molestiae in explicabo unde aut tempora cumque sit quia culpa ex iure laborum sit odit iusto. Sit repudiandae fugiat cum quam architecto qui voluptatem pariatur ea alias illum aut itaque molestiae. Quo voluptas tempora et voluptas nisi est sequi quos eum eius iusto et recusandae voluptatum. Sit explicabo corrupti et quam dolorem sit quia officia et vero assumenda vel ipsam doloremque qui aliquam veniam ut excepturi quia!\r\n', 'fichiers_config/uploads/photos_profil/67c0ba2f63a3b.jpg');
 
 -- --------------------------------------------------------
 
@@ -65,7 +88,14 @@ CREATE TABLE IF NOT EXISTS `musique` (
   `date_import` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `utilisateur_id` (`utilisateur_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `musique`
+--
+
+INSERT INTO `musique` (`id`, `utilisateur_id`, `titre`, `artiste`, `album`, `genre`, `chemin_fichier`, `date_import`) VALUES
+(1, 1, 'All Nigth Long', 'Bob L\'eponge', 'Test', 'Pop', 'fichiers_config/uploads/musique/67c0ae0516fc3_All Night Long.mp3', '2025-02-27 22:25:09');
 
 -- --------------------------------------------------------
 
