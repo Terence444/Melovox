@@ -61,16 +61,24 @@
 </head>
 
 <body>
+    <?php
+        // Vérifier si une session est déjà active avant d'appeler session_start()
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $is_connected = isset($_SESSION['user_id']); // Vérifier si l'utilisateur est connecté
+    ?>
+
     <header>
         <div id="logo_title">
-            <a href="index.php"><img id="logo" src="visuel\logo\logo.png" alt=""></a>
+            <a href="index.php"><img id="logo" src="visuel/logo/logo.png" alt=""></a>
             <h1>Mélovox</h1>
         </div>
         <div id="search_connex">
             <div class="wrapMenu">
                 <div class="menu menu--top-right" id="menu_top_right">
-                    <a class="menu__btn" dd-nav-expand="menu_top_right"><img src="visuel\icons\menu_hamburger.png"
-                            alt=""></a>
+                    <a class="menu__btn" dd-nav-expand="menu_top_right"><img src="visuel/icons/menu_hamburger.png" alt=""></a>
                     <ul class="menu__list">
                         <li><a href="index.php">Accueil</a></li>
                         <li><a href="contactform.php">Contact</a></li>
@@ -80,8 +88,14 @@
             </div>
 
             <a href="search.php"><span class="material-symbols-outlined">search</span></a>
-            <a href="connexion.php"><button>Connexion</button></a>
-            <span id="vertical_line"></span>
-            <a href="inscription.php"><button>Inscription</button></a>
+            <?php if ($is_connected) : ?>
+                <!-- Afficher le bouton de déconnexion si l'utilisateur est connecté -->
+                <a href="deconnexion.php"><button>Déconnexion</button></a>
+            <?php else : ?>
+                <!-- Afficher les boutons de connexion et d'inscription si l'utilisateur n'est pas connecté -->
+                <a href="connexion.php"><button>Connexion</button></a>
+                <span id="vertical_line"></span>
+                <a href="inscription.php"><button>Inscription</button></a>
+            <?php endif; ?>
         </div>
     </header>

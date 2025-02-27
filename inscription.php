@@ -1,7 +1,10 @@
 <?php require "content_dynamique/header.php"; ?>
 
 <?php
-session_start();
+// Vérifier si une session est déjà active avant d'appeler session_start()
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 // Récupérer les messages d'erreur
 $email_error = isset($_SESSION['email_error']) ? $_SESSION['email_error'] : '';
 $pseudo_error = isset($_SESSION['pseudo_error']) ? $_SESSION['pseudo_error'] : '';

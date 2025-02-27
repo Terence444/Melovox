@@ -2,8 +2,10 @@
 require "content_dynamique/header.php";
 include "database/connex_bdd.php";
 
-// Démarrer la session pour obtenir les informations de l'utilisateur connecté
-session_start();
+// Vérifier si une session est déjà active avant d'appeler session_start()
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Vérifier si l'utilisateur est connecté
 if (isset($_SESSION['user_id'])) {
@@ -23,17 +25,29 @@ if (isset($_SESSION['user_id'])) {
     
 ?>
 
+        <?php
+        // Après avoir récupéré $photo_profil depuis la base de données
+        // var_dump($photo_profil); // Pour débogage
+
+        // Chemin du fichier sur le serveur
+        $chemin_fichier = __DIR__ . '/' . $photo_profil;
+
+        // Chemin URL pour le navigateur
+        $chemin_image = '/' . $photo_profil;
+        ?>
+
     <h1>Bienvenue sur votre espace artiste</h1><br>
 
     <!-- Affichage de la photo de profil -->
     <div id="profil">
-        <?php if (!empty($photo_profil) && file_exists($photo_profil)) : ?>
-            <img src="<?php echo htmlspecialchars($photo_profil); ?>" alt="Photo de profil" style="max-width: 200px; border-radius: 50%;">
+        <?php if (!empty($photo_profil) && file_exists($chemin_fichier)) : ?>
+            <img src="<?php echo htmlspecialchars($chemin_image); ?>" alt="Photo de profil" style="max-width: 200px; border-radius: 50%;">
         <?php else : ?>
-            <!-- Image par défaut si aucune photo n'est disponible -->
             <img src="../fichiers_config/uploads/photos_profil/default_profile.png" alt="Photo de profil par défaut" style="max-width: 200px; border-radius: 50%;">
         <?php endif; ?>
+
         <h3><?php echo htmlspecialchars($prenom . ' ' . $nom); ?></h3>
+    </div>
 
     <!-- Modif photo de profil -->
     <form action="fichiers_config/traitement_photo_profil.php" method="post" enctype="multipart/form-data">
@@ -99,7 +113,7 @@ if (isset($_SESSION['photo_error'])) {
                 <input type="text" id="genre" name="genre">
             </div>
             <div>
-                <label for="fichier_musique">Fichier Musique</label>
+                <label for="fichier_musique">Fichier Musique (poids maximum du fichier : 2MO)</label>
                 <input type="file" id="fichier_musique" name="fichier_musique" accept="audio/*" required>
             </div>
             <div>
@@ -109,47 +123,62 @@ if (isset($_SESSION['photo_error'])) {
     </section>
 
     <section>
-        <h2>Mes titres en ligne</h2>
-        <?php
-        // Récupérer la liste des musiques de l'artiste
-        $sql = "SELECT titre, album, genre, chemin_fichier, date_import FROM musique WHERE utilisateur_id = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $utilisateur_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        // Vérifier s'il y a des musiques
-        if ($result->num_rows > 0) {
-            echo "<ul>";
-            while ($musique = $result->fetch_assoc()) {
-                echo "<li>";
-                echo "<strong>" . htmlspecialchars($musique['titre']) . "</strong> ";
-                echo " - Album : " . htmlspecialchars($musique['album']);
-                echo " - Genre : " . htmlspecialchars($musique['genre']);
-                echo " - Importé le : " . htmlspecialchars($musique['date_import']);
-                // Ajouter un lecteur audio pour écouter le titre
-                echo "<audio controls>
-                        <source src='" . htmlspecialchars($musique['chemin_fichier']) . "' type='audio/mpeg'>
-                      Votre navigateur ne supporte pas la balise audio.
-                      </audio>";
-                echo "</li>";
-            }
-            echo "</ul>";
-        } else {
-            echo "<p>Vous n'avez pas encore importé de titres.</p>";
-        }
-        $stmt->close();
-        ?>
-    </section>
+    <h2>Mes titres en ligne</h2>
     <?php
-} else {
-    // Rediriger l'utilisateur vers la page de connexion s'il n'est pas connecté
-    header("Location: ../connexion.php");
-    exit();
-}
+    // Récupérer la liste des musiques de l'artiste
+    $sql = "SELECT titre, album, genre, chemin_fichier, date_import FROM musique WHERE utilisateur_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $utilisateur_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-require "content_dynamique/footer.php";
-?>
+    // Vérifier s'il y a des musiques
+    if ($result->num_rows > 0) {
+        echo "<ul>";
+        while ($musique = $result->fetch_assoc()) {
+            echo "<li>";
+            echo "<strong>" . htmlspecialchars($musique['titre']) . "</strong> ";
+            echo " <br>- Album : " . htmlspecialchars($musique['album']);
+            echo " <br>- Genre : " . htmlspecialchars($musique['genre']);
+            echo " <br>- Importé le : " . htmlspecialchars($musique['date_import']);
+
+            // Définir le chemin complet du fichier audio
+            $chemin_fichier = $musique['chemin_fichier'];
+
+            // Vérifier que le fichier existe
+            if (file_exists($chemin_fichier)) {
+                // Chemin URL pour le navigateur
+                $chemin_audio = '/' . $chemin_fichier;
+
+                // Ajouter un lecteur audio pour écouter le titre
+                echo "<br><audio controls>
+                        <source src='" . htmlspecialchars($chemin_audio) . "' type='audio/mpeg'>
+                        Votre navigateur ne supporte pas la balise audio.
+                      </audio>";
+            } else {
+                echo "Le fichier audio n'existe pas.";
+            }
+
+            echo "</li>";
+        }
+        echo "</ul>";
+    } else {
+        echo "<p>Vous n'avez pas encore importé de titres.</p>";
+    }
+    $stmt->close();
+    ?>
+</section>
+
+
+    <?php
+        } else {
+            // Rediriger l'utilisateur vers la page de connexion s'il n'est pas connecté
+            header("Location: ../connexion.php");
+            exit();
+        }
+
+        require "content_dynamique/footer.php";
+    ?>
 
 <?php
 // Après l'ouverture de la session et avant d'afficher le contenu
