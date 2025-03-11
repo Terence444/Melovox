@@ -1,7 +1,54 @@
 <?php require "content_dynamique/header.php"; ?>
 
+<div id="liste_musiques" class="category_button">
+    <h2>Les musiques</h2>
+
+    <?php
+        include "database/connex_bdd.php";
+
+        // Récupérer toutes les musiques importées par les utilisateurs
+        $sql = "SELECT titre, artiste, album, genre, chemin_fichier FROM musique";
+        $result = $conn->query($sql);
+
+    ?>
+            <ul>
+                <?php
+                // Vérifier s'il y a des musiques à afficher
+                if ($result->num_rows > 0) {
+                    while ($musique = $result->fetch_assoc()) {
+                        // Définir le chemin URL du fichier audio
+                        $chemin_audio = '/uploads/musique/' . basename($musique['chemin_fichier']);
+                        ?>
+                        <li>
+                            <strong><?php echo htmlspecialchars($musique['titre']); ?></strong>
+                            <br>Artiste : <?php echo htmlspecialchars($musique['artiste']); ?>
+                            <br>Album : <?php echo htmlspecialchars($musique['album']); ?>
+                            <br>Genre : <?php echo htmlspecialchars($musique['genre']); ?>
+                            <br>
+                            <audio controls>
+                                <source src="<?php echo htmlspecialchars($chemin_audio); ?>" type="audio/mpeg">
+                                Votre navigateur ne supporte pas la balise audio.
+                            </audio>
+                        </li>
+                        <?php
+                    }
+                } else {
+                    echo "<p>Aucune musique importée pour le moment.</p>";
+                }
+                ?>
+            </ul>
+        </div>
+
+        <?php
+        $conn->close();
+    ?>
+
+
+</div>
+
+
 <!-- /* --------- Section 1-------- */ -->
-<div id="category_button">
+<div class="category_button">
     <h2>Catégorie</h2>
     <div id="buttons">
         <a href="category.php"><button class="Categorie" type="button">Pop</button></a>

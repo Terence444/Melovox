@@ -10,7 +10,7 @@
 
     <div id="fast_signin">
         <h3>Connexion rapide</h3>
-        <p>Lier votre compte avec un réseau social</p>
+        <!-- <p>Lier votre compte avec un réseau social</p>
         <div id="button_icon">
             <button><a href=""><img class="social_network" src="../visuel/icons/buttons_icons/Bouton_facebook.png"
                         alt=""></a></button>
@@ -19,7 +19,7 @@
             <button><a href=""><img class="social_network" src="../visuel/icons/buttons_icons/Bouton_X.png"
                         alt=""></a></button>
         </div>
-        <img id="decorative_line" src="visuel/image/Decoration.png" alt="">
+        <img id="decorative_line" src="visuel/image/Decoration.png" alt=""> -->
 
         <form action="fichiers_config/traitement_connexion.php" method="post">
             <div id="email_area">

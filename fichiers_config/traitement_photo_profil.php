@@ -16,19 +16,20 @@ if (isset($_SESSION['user_id'])) {
             if (in_array($mime, $types_permis)) {
                 // Créer un nom de fichier unique
                 $extension = pathinfo($_FILES['nouvelle_photo']['name'], PATHINFO_EXTENSION);
-                $nouveau_nom_fichier = '../fichiers_config/uploads/photos_profil/' . uniqid() . '.' . $extension;
+                $nouveau_nom_fichier = __DIR__ . '/../uploads/photos_profil/' . uniqid() . '.' . $extension;
 
                 // Vérifier que le dossier existe ou le créer
-                if (!is_dir('uploads/photos_profil/')) {
-                    mkdir('uploads/photos_profil/', 0777, true);
+                if (!is_dir(__DIR__ . '/../uploads/photos_profil/')) {
+                    mkdir(__DIR__ . '/../uploads/photos_profil/', 0777, true);
                 }
 
                 // Déplacer le fichier uploadé
                 if (move_uploaded_file($_FILES['nouvelle_photo']['tmp_name'], $nouveau_nom_fichier)) {
                     // Mettre à jour la base de données
+                    $chemin_fichier = str_replace(__DIR__, '', $nouveau_nom_fichier);
                     $sql = "UPDATE artistes SET photo_profil = ? WHERE utilisateur_id = ?";
                     $stmt = $conn->prepare($sql);
-                    $stmt->bind_param("si", $nouveau_nom_fichier, $utilisateur_id);
+                    $stmt->bind_param("si", $chemin_fichier, $utilisateur_id);
 
                     if ($stmt->execute()) {
                         $_SESSION['photo_success'] = "Votre photo de profil a été mise à jour avec succès.";

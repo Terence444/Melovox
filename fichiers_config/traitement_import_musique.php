@@ -15,11 +15,11 @@ if (isset($_SESSION['user_id'])) {
         // Gérer l'upload du fichier de musique
         if (isset($_FILES['fichier_musique']) && $_FILES['fichier_musique']['error'] === UPLOAD_ERR_OK) {
             // Créer un nom de fichier unique pour éviter les conflits
-            $chemin_fichier = 'uploads/musique/' . uniqid() . '_' . basename($_FILES['fichier_musique']['name']);
+            $chemin_fichier =__DIR__ . '/../uploads/musique/' . uniqid() . '_' . basename($_FILES['fichier_musique']['name']);
 
             // Vérifier que le dossier existe, sinon le créer
-            if (!is_dir('uploads/musique/')) {
-                mkdir('uploads/musique/', 0777, true);
+            if (!is_dir(__DIR__ . '/../uploads/musique/')) {
+                mkdir(__DIR__ . '/../uploads/musique/', 0777, true);
             }
 
             // Déplacer le fichier téléchargé vers le dossier de destination
@@ -57,3 +57,5 @@ if (isset($_SESSION['user_id'])) {
 
 $conn->close();
 ?>
+
+fichiers_config/uploads/musique

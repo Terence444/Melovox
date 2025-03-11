@@ -40,6 +40,8 @@
         echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "profile_style.css'>";
     } elseif ($page === 'search.php') {
         echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "search_style.css'>";
+    }elseif ($page === 'espace_perso_artiste.php') {
+        echo "<link rel='stylesheet' type='text/css' href='" . CSS_PATH . "espace_perso_artiste_style.css'>";
     }
     ?>
 
@@ -91,6 +93,7 @@
             <?php if ($is_connected) : ?>
                 <!-- Afficher le bouton de déconnexion si l'utilisateur est connecté -->
                 <a href="deconnexion.php"><button>Déconnexion</button></a>
+                <a href="../espace_perso_artiste.php"><button>Mon espace</button></a>
             <?php else : ?>
                 <!-- Afficher les boutons de connexion et d'inscription si l'utilisateur n'est pas connecté -->
                 <a href="connexion.php"><button>Connexion</button></a>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 27 fév. 2025 à 19:53
+-- Généré le : mar. 11 mars 2025 à 22:00
 -- Version du serveur : 8.3.0
 -- Version de PHP : 8.2.18
 
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `artistes` (
 --
 
 INSERT INTO `artistes` (`id`, `utilisateur_id`, `biographie`, `photo_profil`) VALUES
-(1, 1, 'Ceci est un test de biographie d\'artiste\r\nLorem ipsum dolor sit amet. In doloremque repudiandae ut saepe quasi sed excepturi consequatur sit totam eveniet ab ipsum facilis. Ab quis nostrum aut blanditiis voluptas sit omnis fuga? Et tempore numquam est libero maiores aut galisum repellendus est maxime nesciunt. </p><p>Est deserunt blanditiis hic quae magni aut asperiores aliquid qui mollitia laboriosam et amet amet et voluptatum beatae sit inventore molestiae! Aut minus explicabo eos blanditiis laborum sit dolores expedita! </p><p>Est voluptas molestiae in explicabo unde aut tempora cumque sit quia culpa ex iure laborum sit odit iusto. Sit repudiandae fugiat cum quam architecto qui voluptatem pariatur ea alias illum aut itaque molestiae. Quo voluptas tempora et voluptas nisi est sequi quos eum eius iusto et recusandae voluptatum. Sit explicabo corrupti et quam dolorem sit quia officia et vero assumenda vel ipsam doloremque qui aliquam veniam ut excepturi quia!\r\n', 'fichiers_config/uploads/photos_profil/67c0ba2f63a3b.jpg');
+(1, 1, 'Ceci est un test de biographie d\'artiste\r\nLorem ipsum dolor sit amet. In doloremque repudiandae ut saepe quasi sed excepturi consequatur sit totam eveniet ab ipsum facilis. Ab quis nostrum aut blanditiis voluptas sit omnis fuga? Et tempore numquam est libero maiores aut galisum repellendus est maxime nesciunt. </p><p>Est deserunt blanditiis hic quae magni aut asperiores aliquid qui mollitia laboriosam et amet amet et voluptatum beatae sit inventore molestiae! Aut minus explicabo eos blanditiis laborum sit dolores expedita! </p><p>Est voluptas molestiae in explicabo unde aut tempora cumque sit quia culpa ex iure laborum sit odit iusto. Sit repudiandae fugiat cum quam architecto qui voluptatem pariatur ea alias illum aut itaque molestiae. Quo voluptas tempora et voluptas nisi est sequi quos eum eius iusto et recusandae voluptatum. Sit explicabo corrupti et quam dolorem sit quia officia et vero assumenda vel ipsam doloremque qui aliquam veniam ut excepturi quia!\r\n', '/uploads/photos_profil/67d0a96de1ba1.jpg');
 
 -- --------------------------------------------------------
 
@@ -88,14 +88,19 @@ CREATE TABLE IF NOT EXISTS `musique` (
   `date_import` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `utilisateur_id` (`utilisateur_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `musique`
 --
 
 INSERT INTO `musique` (`id`, `utilisateur_id`, `titre`, `artiste`, `album`, `genre`, `chemin_fichier`, `date_import`) VALUES
-(1, 1, 'All Nigth Long', 'Bob L\'eponge', 'Test', 'Pop', 'fichiers_config/uploads/musique/67c0ae0516fc3_All Night Long.mp3', '2025-02-27 22:25:09');
+(14, 1, 'All Nigth Long 4', 'Artiste 1', 'Test', 'Rock', 'C:\\wamp64\\www\\Melovox-1\\fichiers_config/../uploads/musique/67d0a127e9bfb_All Night Long.mp3', '2025-03-12 00:46:31'),
+(13, 1, 'All Nigth Long 3', 'Artiste 1', 'Test', 'Rock', 'C:\\wamp64\\www\\Melovox-1\\fichiers_config/../uploads/musique/67d0a127e9bfb_All Night Long.mp3', '2025-03-12 00:46:31'),
+(11, 1, 'All Nigth Long', 'Artiste 1', 'Test', 'Pop', 'C:\\wamp64\\www\\Melovox-1\\fichiers_config/../uploads/musique/67d09bbb5b83b_All Night Long.mp3', '2025-03-12 00:23:23'),
+(12, 1, 'All Nigth Long 2', 'Artiste 1', 'Test', 'Rock', 'C:\\wamp64\\www\\Melovox-1\\fichiers_config/../uploads/musique/67d0a127e9bfb_All Night Long.mp3', '2025-03-12 00:46:31'),
+(15, 1, 'All Nigth Long 5', 'Artiste 1', 'Test', 'Rock', 'C:\\wamp64\\www\\Melovox-1\\fichiers_config/../uploads/musique/67d0a127e9bfb_All Night Long.mp3', '2025-03-12 00:46:31'),
+(16, 1, 'All Nigth Long 6', 'Artiste 1', 'Test', 'Rock', 'C:\\wamp64\\www\\Melovox-1\\fichiers_config/../uploads/musique/67d0a127e9bfb_All Night Long.mp3', '2025-03-12 00:46:31');
 
 -- --------------------------------------------------------
 
@@ -121,14 +126,17 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `pseudo` (`pseudo`),
   UNIQUE KEY `email` (`email`(191))
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `utilisateurs`
 --
 
 INSERT INTO `utilisateurs` (`id`, `nom`, `prenom`, `date_naissance`, `email`, `sexe`, `est_artiste`, `partage_creations`, `pays`, `pseudo`, `mot_de_passe`, `photo_profil`, `date_inscription`) VALUES
-(1, 'Bob', 'Sponge', '2024-04-10', 'bob.sponge@gmail.com', 'homme', 1, 1, 'France', 'Bob L\'éponge', '$2y$10$e4Bv9p3l68T3fEKdHP.A3eZJns54ynurjDO3v4G/PzTKB8/Qt/17O', NULL, '2025-02-26 23:57:35');
+(1, 'Bob', 'Sponge', '2024-04-10', 'bob.sponge@gmail.com', 'homme', 1, 1, 'France', 'Bob L\'éponge', '$2y$10$e4Bv9p3l68T3fEKdHP.A3eZJns54ynurjDO3v4G/PzTKB8/Qt/17O', NULL, '2025-02-26 23:57:35'),
+(2, 'Fong', 'Laura', '1983-12-14', 'laura.fong@gmail.com', 'femme', 1, 1, 'France', 'Laura Fong', '$2y$10$s2yP5QjHCwyPY7fHusjh8u/FUVgt6tT7n1aZqxqiGE9GvLvuAQ6wW', 'uploads/67d0aaaba50a4_9541373526046.webp', '2025-03-12 01:27:07'),
+(3, 'Yanis', 'Yello', '1975-08-05', 'yanis.yello@gmail.com', 'homme', 1, 1, 'France', 'YanYel', '$2y$10$X2fBdupeFq5DAqHBdqVJfuJ9VlFQelOYMDZVvoFFYjRSOGehJoF8W', 'uploads/67d0abe46e058_bobeponge.jpg', '2025-03-12 01:32:20'),
+(4, 'test', 'test', '2001-05-12', 'test@gmail.com', 'ne_pas_repondre', 1, 1, 'Italie', 'Test', '$2y$10$5T7Hm7tAMWVt38oSyvQtku6LstVM02AFd8/Gzoc8ru7QT5MpAkIJu', 'uploads/67d0ad436ee47_bobeponge.jpg', '2025-03-12 01:38:11');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

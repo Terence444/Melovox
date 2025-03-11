@@ -25,16 +25,17 @@ if (isset($_SESSION['user_id'])) {
     
 ?>
 
-        <?php
-        // Après avoir récupéré $photo_profil depuis la base de données
-        // var_dump($photo_profil); // Pour débogage
+    <?php
+    // Après avoir récupéré $photo_profil depuis la base de données
+    // var_dump($photo_profil); // Pour débogage
 
-        // Chemin du fichier sur le serveur
-        $chemin_fichier = __DIR__ . '/' . $photo_profil;
+    // Chemin du fichier sur le serveur
+    $chemin_fichier = __DIR__ . 'uploads/photos_profil/' . $photo_profil;
 
-        // Chemin URL pour le navigateur
-        $chemin_image = '/' . $photo_profil;
-        ?>
+    // Chemin URL pour le navigateur (en supposant que le chemin depuis la racine du serveur soit /uploads/photos_profil/)
+    $chemin_image = '/uploads/photos_profil/' . $photo_profil;
+    ?>
+
 
     <h1>Bienvenue sur votre espace artiste</h1><br>
 
@@ -43,7 +44,7 @@ if (isset($_SESSION['user_id'])) {
         <?php if (!empty($photo_profil) && file_exists($chemin_fichier)) : ?>
             <img src="<?php echo htmlspecialchars($chemin_image); ?>" alt="Photo de profil" style="max-width: 200px; border-radius: 50%;">
         <?php else : ?>
-            <img src="../fichiers_config/uploads/photos_profil/default_profile.png" alt="Photo de profil par défaut" style="max-width: 200px; border-radius: 50%;">
+            <img src="uploads/photos_profil/default_profile.png" alt="Photo de profil par défaut" style="max-width: 200px; border-radius: 50%;">
         <?php endif; ?>
 
         <h3><?php echo htmlspecialchars($prenom . ' ' . $nom); ?></h3>
@@ -122,51 +123,62 @@ if (isset($_SESSION['photo_error'])) {
         </form>
     </section>
 
-    <section>
+    <section id="liste_musiques">
     <h2>Mes titres en ligne</h2>
-    <?php
-    // Récupérer la liste des musiques de l'artiste
-    $sql = "SELECT titre, album, genre, chemin_fichier, date_import FROM musique WHERE utilisateur_id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $utilisateur_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
 
-    // Vérifier s'il y a des musiques
-    if ($result->num_rows > 0) {
-        echo "<ul>";
-        while ($musique = $result->fetch_assoc()) {
-            echo "<li>";
-            echo "<strong>" . htmlspecialchars($musique['titre']) . "</strong> ";
-            echo " <br>- Album : " . htmlspecialchars($musique['album']);
-            echo " <br>- Genre : " . htmlspecialchars($musique['genre']);
-            echo " <br>- Importé le : " . htmlspecialchars($musique['date_import']);
+    <div id="les_musiques">
+        <?php
+        // Récupérer la liste des musiques de l'artiste
+        $sql = "SELECT titre, album, genre, chemin_fichier, date_import FROM musique WHERE utilisateur_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $utilisateur_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-            // Définir le chemin complet du fichier audio
-            $chemin_fichier = $musique['chemin_fichier'];
+        // Vérifier s'il y a des musiques
+        if ($result->num_rows > 0) {
+            echo "<ul>";
+            while ($musique = $result->fetch_assoc()) {
+                echo "<li>";
+                echo "<strong>" . htmlspecialchars($musique['titre']) . "</strong> ";
+                echo " <br>Album : " . htmlspecialchars($musique['album']);
+                echo " <br>Genre : " . htmlspecialchars($musique['genre']);
+                echo " <br>Importé le : " . htmlspecialchars($musique['date_import']);
 
-            // Vérifier que le fichier existe
-            if (file_exists($chemin_fichier)) {
-                // Chemin URL pour le navigateur
-                $chemin_audio = '/' . $chemin_fichier;
+                // Définir le chemin complet du fichier audio
+                $chemin_fichier = $musique['chemin_fichier'];
 
-                // Ajouter un lecteur audio pour écouter le titre
-                echo "<br><audio controls>
-                        <source src='" . htmlspecialchars($chemin_audio) . "' type='audio/mpeg'>
-                        Votre navigateur ne supporte pas la balise audio.
-                      </audio>";
-            } else {
-                echo "Le fichier audio n'existe pas.";
+                // Vérifier que le fichier existe
+                if (file_exists($chemin_fichier)) {
+                    // Chemin URL pour le navigateur
+                    $chemin_audio = str_replace(__DIR__, '', $chemin_fichier);
+
+                    // Ajouter un lecteur audio pour écouter le titre
+                    echo "<br><audio controls>
+                            <source src='" . htmlspecialchars($chemin_audio) . "' type='audio/mpeg'>
+                            Votre navigateur ne supporte pas la balise audio.
+                        </audio>";
+
+                    // Formulaire pour supprimer le titre
+                    echo "<br>
+                    <form action='fichiers_config/supp_musique.php' method='post'>
+                        <input type='hidden' name='musique_id' value='" . htmlspecialchars($musique['chemin_fichier']) . "'>
+                        <input type='submit' value='Supprimer' style='background-color: #ff4d4d; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;'>
+                    </form>";
+                } else {
+                    echo "Le fichier audio n'existe pas.";
+                }
+
+                echo "</li>";
             }
-
-            echo "</li>";
+            echo "</ul>";
+        } else {
+            echo "<p>Vous n'avez pas encore importé de titres.</p>";
         }
-        echo "</ul>";
-    } else {
-        echo "<p>Vous n'avez pas encore importé de titres.</p>";
-    }
-    $stmt->close();
-    ?>
+        $stmt->close();
+
+        ?>
+    </div>
 </section>
 
 
